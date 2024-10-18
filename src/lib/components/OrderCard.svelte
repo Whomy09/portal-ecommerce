@@ -4,8 +4,8 @@
   import Ellipsis from "lucide-svelte/icons/ellipsis";
 
   export let order: Order;
-
-  $: orderId = `${order.id.slice(0, 11)}...`
+  
+  $: orderId = `${order.id.slice(0, 11)}...`;
 </script>
 
 <div class="flex flex-col border rounded-md p-4">

@@ -1,38 +1,32 @@
-# create-svelte
+# E-Commerce
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+## Descripción
 
-## Creating a project
+Este proyecto es una aplicación de e-commerce desarrollada con SvelteKit, que utiliza shadcn/ui para componentes de interfaz de usuario estilizados y Tailwind CSS para el diseño responsivo y moderno. La aplicación permite crear y gestionar productos, así como procesar órdenes de compra. Con una interfaz intuitiva y ágil, los usuarios pueden agregar productos con detalles como nombre, descripción, precio e imagen, y luego realizar pedidos fácilmente. SvelteKit garantiza una experiencia de usuario rápida y dinámica, mientras que la integración con shadcn y Tailwind CSS asegura un diseño atractivo y personalizable.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Tecnologías
+
+- Sveltekit
+- TypeScript
+- Talwind
+- Shadcn
+
+## Instalación
+
+1. Descargamos dependencias necesarias usando `npm`
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+npm install
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+2. Inicial el servidor de desarrollo
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+3. Configuración: Necesita un archivo .env para obtenerlo puede contactar con el creador del proyecto, ademas este proyecto se probo en un entorno local por lo que el backend tambien lo necesitara, para obtenerlo ingrese al siguiente link: [https://github.com/Whomy09/server-ecommerce](https://github.com/Whomy09/server-ecommerce)
 
-To create a production version of your app:
+## Conclusión
 
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+La aplicación de e-commerce combina rapidez y diseño moderno para gestionar productos y órdenes de forma eficiente. Su estructura flexible permite fácil personalización y escalabilidad para futuros desarrollos.

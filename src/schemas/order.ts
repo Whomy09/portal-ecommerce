@@ -20,3 +20,11 @@ export const orderSchema = z.object({
 });
 
 export type Order = z.infer<typeof orderSchema>;
+
+export const createOrderSchema = orderSchema.pick({
+  products: true,
+  totalAmount: true,
+  userId: true
+})
+
+export type CreateOrderSchema = typeof createOrderSchema
