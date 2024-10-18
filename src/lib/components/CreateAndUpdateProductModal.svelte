@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as Dialog from "$lib/components/ui/dialog";
   import { createEventDispatcher } from "svelte";
-  import CreateProductForm from "./CreateProductForm.svelte";
+  import CreateAndUpdateProductForm from "./CreateAndUpdateProductForm.svelte";
   import type { Infer, SuperValidated } from "sveltekit-superforms";
   import { type CreateProductSchema, type Product, type UpdateProductSchema } from "../../schemas/product";
   
@@ -24,6 +24,6 @@
 
 <Dialog.Root bind:open={isOpen} onOpenChange={closeModal}>
   <Dialog.Content>
-    <CreateProductForm {dataCreate} {dataUpdate} {mode} on:success={handleSuccess}  />
+    <CreateAndUpdateProductForm {dataCreate} {dataUpdate} {mode} on:success={handleSuccess}  />
   </Dialog.Content>
 </Dialog.Root>

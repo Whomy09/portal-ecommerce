@@ -1,7 +1,7 @@
 <script lang="ts">
   import ProductCard from "$lib/components/ProductCard.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
-  import CreateProductModal from "$lib/components/CreateProductModal.svelte";
+  import CreateAndUpdateProductModal from "$lib/components/CreateAndUpdateProductModal.svelte";
   import type { Product } from "../../schemas/product";
 
   export let data;
@@ -27,6 +27,7 @@
       description: detail.description,
       price: detail.price,
       id: detail.id,
+      file: null
     }
     
     mode = 'update'
@@ -40,7 +41,7 @@
 
 <div class="flex justify-end my-4">
   <Button on:click={toggleModal} >Create product</Button>
-  <CreateProductModal 
+  <CreateAndUpdateProductModal 
     {isOpen}
     {mode}
     dataUpdate={data.formUpdateProduct} 
