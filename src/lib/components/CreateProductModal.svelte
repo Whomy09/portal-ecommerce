@@ -3,10 +3,12 @@
   import { createEventDispatcher } from "svelte";
   import CreateProductForm from "./CreateProductForm.svelte";
   import type { Infer, SuperValidated } from "sveltekit-superforms";
-  import type { CreateProductSchema, Product } from "../../schemas/product";
+  import { type CreateProductSchema, type Product, type UpdateProductSchema } from "../../schemas/product";
   
+  export let mode: 'create' | 'update' = 'create';
   export let isOpen: boolean;
-  export let data: SuperValidated<Infer<CreateProductSchema>>;
+  export let dataCreate: SuperValidated<Infer<CreateProductSchema>>;
+  export let dataUpdate: SuperValidated<Infer<UpdateProductSchema>>;
 
   const dispatch = createEventDispatcher();
   
@@ -22,6 +24,6 @@
 
 <Dialog.Root bind:open={isOpen} onOpenChange={closeModal}>
   <Dialog.Content>
-    <CreateProductForm {data} on:success={handleSuccess} />
+    <CreateProductForm {dataCreate} {dataUpdate} {mode} on:success={handleSuccess}  />
   </Dialog.Content>
 </Dialog.Root>

@@ -1,7 +1,6 @@
 <script lang="ts">
   import * as Card from "$lib/components/ui/card";
   import type { Product } from "../../schemas/product";
-  import Button from "./ui/button/button.svelte";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import Ellipsis from "lucide-svelte/icons/ellipsis";
   import { createEventDispatcher } from "svelte";
@@ -16,6 +15,10 @@
     await http.delete(`/product/${product.id}`)
     dispatch('delete', product)
   }
+
+  function handleEdit() {
+    dispatch('edit', product)
+  }
 </script>
 
 <Card.Root>
@@ -29,7 +32,7 @@
           <DropdownMenu.Group>
             <DropdownMenu.Label>Menu</DropdownMenu.Label>
             <DropdownMenu.Separator />
-            <DropdownMenu.Item>Edit</DropdownMenu.Item>
+            <DropdownMenu.Item on:click={handleEdit}>Edit</DropdownMenu.Item>
             <DropdownMenu.Item on:click={handleDelete}>Delete</DropdownMenu.Item>
           </DropdownMenu.Group>
         </DropdownMenu.Content>
@@ -50,7 +53,6 @@
   <Card.Footer>
     <div class="flex flex-col gap-4">
       <p>${product.price}</p>
-      <Button>Agregar al carrito</Button>
     </div>
   </Card.Footer>
 </Card.Root>

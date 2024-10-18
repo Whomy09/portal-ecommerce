@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as Form from "$lib/components/ui/form";
   import { Input } from "$lib/components/ui/input";
-  import { createProductSchema, type CreateProductSchema } from "../../schemas/product";
+  import { createProductSchema, updateProductSchema, type CreateProductSchema, type UpdateProductSchema } from "../../schemas/product";
   import {
    type SuperValidated,
    type Infer,
@@ -24,12 +24,16 @@
     }): Promise<void>;
   }
 
-  export let data: SuperValidated<Infer<CreateProductSchema>>;
+  export let mode: 'create' | 'update' = 'create';
+  export let dataCreate: SuperValidated<Infer<CreateProductSchema>>;
+  export let dataUpdate: SuperValidated<Infer<UpdateProductSchema>>;
+
   let isLoading = false;
 
   const dispatch = createEventDispatcher();
-  const form = superForm(data, {
-   validators: zodClient(createProductSchema),
+
+  const form = superForm(mode === 'create' ? dataCreate : dataUpdate, {
+   validators: zodClient(mode === 'create' ? createProductSchema : updateProductSchema),
   });
   
   const { form: formData } = form;
@@ -46,6 +50,7 @@
       await update()
       
       const info = result as unknown as { data: { form: string } }
+      
       const product = JSON.parse(info.data.form);
 
       dispatch('success', product)
@@ -57,10 +62,19 @@
   
 <form 
   method="post" 
-  action="?/createProduct" 
+  action={mode === 'create' ? "?/createProduct" : "?/updateProduct"} 
   use:enhance={handleForm} 
   enctype="multipart/form-data"
 >
+  {#if mode === 'update'}
+    <Form.Field {form} name="id" class="hidden">
+      <Form.Control let:attrs>
+        <Form.Label>Name</Form.Label>
+        <Input {...attrs} bind:value={$formData.id} disabled={isLoading} />
+      </Form.Control>
+      <Form.FieldErrors />
+    </Form.Field>
+  {/if}
   <Form.Field {form} name="name">
     <Form.Control let:attrs>
       <Form.Label>Name</Form.Label>
@@ -68,6 +82,7 @@
     </Form.Control>
     <Form.FieldErrors />
   </Form.Field>
+  
   
   <Form.Field {form} name="price">
     <Form.Control let:attrs>

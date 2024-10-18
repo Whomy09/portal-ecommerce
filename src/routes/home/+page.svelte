@@ -7,6 +7,7 @@
   export let data;
   
   let isOpen = false;
+  let mode: 'create' | 'update' = 'create';
 
   function toggleModal() {
     isOpen = !isOpen
@@ -19,6 +20,18 @@
   function handleDeleteProduct({ detail }: { detail: Product }) {
     data.products = data.products.filter((product) => product.id !== detail.id)
   }
+
+  function handleEditProduct({ detail }: { detail: Product }) {
+    data.formUpdateProduct.data = {
+      name: detail.name,
+      description: detail.description,
+      price: detail.price,
+      id: detail.id,
+    }
+    
+    mode = 'update'
+    isOpen = true
+  }
 </script>
 
 <svelte:head>
@@ -28,8 +41,10 @@
 <div class="flex justify-end my-4">
   <Button on:click={toggleModal} >Create product</Button>
   <CreateProductModal 
-    {isOpen} 
-    data={data.form} 
+    {isOpen}
+    {mode}
+    dataUpdate={data.formUpdateProduct} 
+    dataCreate={data.form} 
     on:close={toggleModal} 
     on:addNewProduct={handleAddNewProduct} 
   />
@@ -38,7 +53,7 @@
 <div class="grid grid-cols-1 gap-4 px-2 justify-center lg:grid-cols-4">
   {#if data.products.length}
     {#each data.products as product}
-      <ProductCard {product} on:delete={handleDeleteProduct} />
+      <ProductCard {product} on:delete={handleDeleteProduct} on:edit={handleEditProduct} />
     {/each}
   {:else}
     <span>No hay productos</span>
